@@ -53,7 +53,7 @@ const getProfile = async (req, res) => {
   
   try {
     const { wallet } = req.params;
-    const user = await User.findOne({ wallet_address: wallet });
+    const user = await User.findOne({ wallet_address: { $regex: new RegExp(wallet, 'i') } });
     
     if (!user) {
       console.log('No profile found for wallet:', wallet);
