@@ -50,6 +50,10 @@ const NFTSchema = new mongoose.Schema({
   isSold: {
     type: Boolean,
     default: false
+  },
+  duration: {
+    value: { type: Number, required: false },
+    unit: { type: String, enum: ["day", "week", "month", "year"], required: false }
   }
 });
 
