@@ -32,4 +32,7 @@ router.get('/nfts/owner/:owner', getNFTsByOwner);
 router.put('/nft/:tokenId', updateNFT);
 router.delete('/nft/:tokenId', deleteNFT);
 
+// Update NFT information
+router.post('/nft/update', updateNFT);
+
 module.exports = router;

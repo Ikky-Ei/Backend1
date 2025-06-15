@@ -67,7 +67,9 @@ const getNFTsByOwner = async (req, res) => {
 // Update NFT
 const updateNFT = async (req, res) => {
   try {
-    const { tokenId } = req.params;
+    const { tokenId } = req.body;
+    console.log("Backend: Received NFT update request for tokenId:", tokenId, "Type:", typeof tokenId);
+    console.log("Backend: Full request body for updateNFT:", req.body);
     const nft = await NFT.findOneAndUpdate(
       { tokenId },
       req.body,
@@ -75,6 +77,7 @@ const updateNFT = async (req, res) => {
     );
     
     if (!nft) {
+      console.log("Backend: NFT with tokenId", tokenId, "not found.");
       return res.status(404).json({ message: 'NFT not found' });
     }
     

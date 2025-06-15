@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Transaction = require('../models/Transaction');
+const NFT = require('../models/NFT');
 
 // Create or update user profile
 const upsertProfile = async (req, res) => {
@@ -92,9 +93,39 @@ const getTransactions = async (req, res) => {
   }
 };
 
+// Update NFT information
+const updateNFT = async (req, res) => {
+  try {
+    const { tokenId, seller, owner, duration, isListed, isSold } = req.body;
+
+    // Tìm NFT theo tokenId và cập nhật thông tin
+    const nft = await NFT.findOneAndUpdate(
+      { tokenId },
+      {
+        seller,
+        owner,
+        duration: 0, 
+        isListed,
+        isSold
+      },
+      { new: true }
+    );
+
+    if (!nft) {
+      return res.status(404).json({ message: 'NFT not found' });
+    }
+
+    res.status(200).json(nft);
+  } catch (error) {
+    console.error('Error in updateNFT:', error);
+    res.status(500).json({ message: 'Error updating NFT', error: error.message });
+  }
+};
+
 module.exports = {
   upsertProfile,
   getProfile,
   addTransaction,
-  getTransactions
+  getTransactions,
+  updateNFT
 };
