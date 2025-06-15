@@ -33,7 +33,7 @@ const NFTSchema = new mongoose.Schema({
   owner: {
     type: String,
     required: true,
-    ref: 'User'  // Reference to User model
+    ref: 'User'  
   },
   category: {
     type: String,
