@@ -51,6 +51,14 @@ const NFTSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  royalties: {
+    type: String, 
+    required: false 
+  },
+  properties: {
+    type: String, 
+    required: false
+  },
   duration: {
     value: { type: Number, required: false },
     unit: { type: String, enum: ["day", "week", "month", "year"], required: false }
